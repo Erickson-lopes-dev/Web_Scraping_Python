@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 
+# requisição
 html = requests.get('https://brasilescola.uol.com.br/curiosidades/'
                     'candidatas-as-sete-maravilhas-mundo-contemporaneo.htm')
 
