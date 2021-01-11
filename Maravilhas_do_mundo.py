@@ -9,6 +9,7 @@ if html.status_code == 200:
     print('Requisição concluida com sucesso! \n')
 
     # Fornece ao bs4 a página e modo de leitura
+
     soup = BeautifulSoup(html.content, 'html.parser')
 
     # Procura todos as tags Strong e retorna printando cada item da lista
