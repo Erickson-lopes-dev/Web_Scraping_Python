@@ -31,4 +31,3 @@ for item in div_use_for.find_all('li'):
 
     print()
 
-# [print(a) for a in soup.find_all('a', attrs={'class': 'tag'})]
