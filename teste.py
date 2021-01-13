@@ -1,4 +1,5 @@
 from prettytable import PrettyTable
+from tqdm import tqdm
 
 frase = [
     {'musica': 'Anarkilópolis', 'frase': 'pra o diabo, os que me chamaram aqui'},
@@ -12,7 +13,7 @@ frase = [
 
 print(frase)
 
-tabela_final = PrettyTable(['Música', 'Frase a Palavra encontrada'])
+tabela_final = PrettyTable(['Música', 'Frase com a palavra procurada'])
 
 [tabela_final.add_row([i['musica'], i['frase']]) for n, i in enumerate(frase) if i not in frase[n + 1:]]
 

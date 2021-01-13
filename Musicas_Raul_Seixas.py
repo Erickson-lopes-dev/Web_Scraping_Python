@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 from prettytable import PrettyTable
+from tqdm import tqdm
 
 palavra = 'diabo'
 
@@ -23,8 +24,8 @@ for tag in soup.find(id='alfabetMusicList').find_all('a'):
         # # printa para exibir o caminho completo
         # print('https://www.vagalume.com.br' + caminhno)
 
-frases_encontradas = []
-for num, link_musica in enumerate(links):
+frases = []
+for link_musica in tqdm(links):
     html_musica = requests.get(link_musica)
     soup = BeautifulSoup(html_musica.content, 'html.parser')
 
@@ -34,7 +35,7 @@ for num, link_musica in enumerate(links):
     try:
         for linhas in soup.find(id="lyrics").contents:
             if palavra.lower() in str(linhas).lower():
-                frases_encontradas.append(
+                frases.append(
                     dict(musica=soup.find(id="lyricContent").find('h1').string, frase=str(linhas).lower())
                 )
                 print(soup.find(id='lyricContent').find('h1').string, ':')
@@ -43,14 +44,12 @@ for num, link_musica in enumerate(links):
         pass
 
 print('\n'*3)
+#
 
-# tabela_final = PrettyTable(['Música', 'Frase a Palavra encontrada'])
+tabela_final = PrettyTable(['Música', 'Frase a Palavra encontrada'])
 
-[print(i) for n, i in enumerate(frases_encontradas) if i not in frases_encontradas[n + 1:]]
+[tabela_final.add_row([str(i['musica']), str(i['frase'])]) for n, i in enumerate(frases) if i not in frases[n + 1:]]
 
-# for item in frases_encontradas:
-#     tabela_final.add_row([str(item[0]), str(item[1])])
-
-# print(tabela_final)
+print(tabela_final)
 
 
