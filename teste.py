@@ -1,5 +1,5 @@
 from prettytable import PrettyTable
-from tqdm import tqdm
+import string
 
 frase = [
     {'musica': 'Anarkilópolis', 'frase': 'pra o diabo, os que me chamaram aqui'},
@@ -18,3 +18,9 @@ tabela_final = PrettyTable(['Música', 'Frase com a palavra procurada'])
 [tabela_final.add_row([i['musica'], i['frase']]) for n, i in enumerate(frase) if i not in frase[n + 1:]]
 
 print(tabela_final)
+linha = 'pra o diabo, os ?que me .chamaram aqui!'
+
+for item in string.punctuation:
+    linha = linha.replace(str(item), '')
+
+print()
